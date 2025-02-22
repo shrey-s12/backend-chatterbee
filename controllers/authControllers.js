@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const USER = require('../models/userModel');
 const { generateToken } = require('../lib/utils');
-const { cloudinary } = require('../lib/cloudinary');
+const cloudinary = require('../lib/cloudinary');
 
 const Register = async (req, res) => {
     const { fullName, email, password } = req.body;
@@ -102,6 +102,7 @@ const updateProfile = async (req, res) => {
 
         res.status(200).json(updatedUser);
     } catch (err) {
+        console.log("Error updating profile: ", err);
         res.status(400).json({ message: err.message });
     }
 }
