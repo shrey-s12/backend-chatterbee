@@ -6,11 +6,13 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('./config/connection');
 
+const { app, server } = require('./lib/socket');
+
 const AuthRoutes = require('./routes/authRouter');
 const MessageRoutes = require('./routes/messageRouter');
 const PORT = process.env.PORT;
 const CLIENT_URL = process.env.CLIENT_URL;
-const app = express();
+
 app.use(cors({
     origin: CLIENT_URL,
     credentials: true
@@ -22,6 +24,6 @@ app.use(cookieParser());
 app.use("/api/auth", AuthRoutes);
 app.use("/api/messages", MessageRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
